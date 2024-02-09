@@ -19,7 +19,7 @@ const gradeMapping = {
 const unIncludedCourses = [
     '[HUM 119] Human Rights and Combating Corruption',
     '[CIS 1] Summer Training 1',
-    '[CIS 1] Summer Training 2'
+    '[CIS 2] Summer Training 2'
 ]
 
 const gradeRegex = /[A-D][+\-]?/g;
