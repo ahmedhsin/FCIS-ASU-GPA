@@ -1,0 +1,22 @@
+{
+	"manifest_version": 2,
+
+	"name": "FCIS-ASU-GPA",
+	"description": "CALCULATE GPA AND GET REPORT",
+	"version": "1.0",
+	"author": "@ahmedhsin",
+
+	"background": {
+		"scripts": ["popup.js"],
+		"persistent": true
+	},
+
+	"permissions": [
+        "tabs",
+        "http://*/",
+        "https://*/"
+    ],
+	"browser_action": {
+		"default_popup": "popup.html"
+	}
+}

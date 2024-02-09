@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f5f5f5; /* Light gray background */
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            width: 150px;
+            height: 40px;
+            margin: 10px;
+            background-color: #4CAF50; /* Green background */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e8e41; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button id="clearCourses">Clear Courses</button>
+        <button id="addCourses">Add Courses</button>
+        
+        <button id="getInfo">getInfo</button>
+        <p id="gpa"></p>
+    </div>
+    <script src="popup.js"></script>
+
+</body>
+</html>
