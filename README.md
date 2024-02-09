@@ -26,7 +26,7 @@ This Chrome extension allows you to automate the process of generating a report 
 
 5. For each semester, click on "Add Courses" to add courses information.
 
-6. After reaching the final semester, click on "Get Info" to compile the information.
+6. After reaching the final semester, click on "Generate Report" to compile the information.
 
 7. View the generated report and save it as needed.
 
@@ -39,3 +39,4 @@ This extension is provided for educational purposes and may not work with future
 Feel free to contribute by opening issues or submitting pull requests.
 
 Thanks to [@abdullahs](https://github.com/abdullhss) for the report template.
+Thanks to [@Abdo-Hamdi](https://github.com/Abdo-Hamdi) for submitting issues
