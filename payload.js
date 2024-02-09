@@ -11,18 +11,37 @@ const gradeMapping = {
     'D+': 1.3,
     'D': 1.0,
     'D-': 0.7,
+    'كرونا': 4,
     'ناجح': 4,
     'راسب': 0
 };
 
+const unIncludedCourses = [
+    '[HUM 119] Human Rights and Combating Corruption',
+    '[CIS 1] Summer Training 1',
+    '[CIS 1] Summer Training 2'
+]
+
 const gradeRegex = /[A-D][+\-]?/g;
 const hoursRegex = /\d+(\.\d+)?/;
-const arGradeRegex = /(ناجح|راسب)/g;
+const arGradeRegex = /(ناجح|راسب|كرونا)/g;
 
 function getPointFromGrade(grade) {
     return gradeMapping[grade]
 }
 
+/**important note this is not the best implemention for getAllSubjects
+ * becouse its complixty is O(N^2) where N is size of courses
+ * to make it run in O(N) use dictonary instead of array so you can search/retrive in ~O(1)
+ * courses will not exceed 50 so it's not a problem
+ */
+function findCourse(courses, courseName){
+    for (let i = 0; i < courses.length; i++){
+        if (courses[i].name == courseName)
+            return i
+    }
+    return -1
+}
 
 function getAllSubjects(courses) {
     const allSubjects = document.getElementsByClassName('price-table-box2')
@@ -36,13 +55,24 @@ function getAllSubjects(courses) {
         grade = t_points[0]
         coursePoints = getPointFromGrade(t_points[0])
         coursesHours = parseFloat(subject.childNodes[3].innerText.match(hoursRegex)[0])
-        courses.push({
+        courseObj = {
             'name': courseName,
             'points': coursePoints,
             'hours': coursesHours,
             'grade': grade
 
-        })
+        }
+        indexToPut = findCourse(courses, courseName)
+        if (indexToPut == -1) {
+            courses.push(courseObj)
+        }else{
+            courses[indexToPut] = courseObj
+        }
+        if (grade === 'كرونا'){
+            if (!unIncludedCourses.includes(courseName)){
+                unIncludedCourses.push(courseName)
+            }
+        }
     });
 }
 function addCourses(courses) {
@@ -63,12 +93,6 @@ function clearCourses() {
     localStorage.setItem('courses', '[]');
 }
 
-
-const unIncludedCourses = [
-    '[HUM 119] Human Rights and Combating Corruption',
-    '[CIS 1] Summer Training 1',
-    '[CIS 1] Summer Training 2'
-]
 
 function calculateGpa(courses) {
     totalHours = courses.reduce((total, current) => {
