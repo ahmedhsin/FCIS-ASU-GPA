@@ -68,11 +68,7 @@ function getAllSubjects(courses) {
         }else{
             courses[indexToPut] = courseObj
         }
-        if (grade === 'كرونا'){
-            if (!unIncludedCourses.includes(courseName)){
-                unIncludedCourses.push(courseName)
-            }
-        }
+        
     });
 }
 function addCourses(courses) {
@@ -96,11 +92,11 @@ function clearCourses() {
 
 function calculateGpa(courses) {
     totalHours = courses.reduce((total, current) => {
-        if (unIncludedCourses.includes(current['name'])) return total
+        if (unIncludedCourses.includes(current['name']) || current['grade'] === 'كرونا') return total
         return total + current['hours']
     }, 0)
     totalPoints = courses.reduce((total, current) => {
-        if (unIncludedCourses.includes(current['name'])) return total
+        if (unIncludedCourses.includes(current['name']) || current['grade'] === 'كرونا') return total
         return total + current['hours'] * current['points']
     }, 0)
     return (totalPoints / totalHours).toFixed(4)
