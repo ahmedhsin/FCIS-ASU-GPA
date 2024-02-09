@@ -99,7 +99,8 @@ function calculateGpa(courses) {
         if (unIncludedCourses.includes(current['name']) || current['grade'] === 'كرونا') return total
         return total + current['hours'] * current['points']
     }, 0)
-    return (totalPoints / totalHours).toFixed(4)
+    gpa = (totalPoints / totalHours)
+    return parseFloat(gpa.toString().slice(0, 5))
 }
 globalCourses = loadCourses()
 //////////////////////
