@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPA Calculator</title>
+    <title>ASU GPA REPORTER</title>
     <style>
         body {
             font-family: sans-serif;
             margin: 0;
-            background-color: #f5f5f5; /* Light gray background */
+            background-color: #222; /* Dark gray background */
+            color: #fff; /* White text */
+            padding: 15px;
         }
 
         .button-container {
@@ -20,8 +22,8 @@
             width: 150px;
             height: 40px;
             margin: 10px;
-            background-color: #4CAF50; /* Green background */
-            color: white;
+            background-color: #333; /* Darker gray background */
+            color: #fff; /* White text */
             border: none;
             border-radius: 5px;
             font-weight: bold;
@@ -29,7 +31,24 @@
         }
 
         button:hover {
-            background-color: #3e8e41; /* Darker green on hover */
+            background-color: #444; /* Even darker gray on hover */
+        }
+
+        #gpa {
+            color: #0f0; /* Green for GPA */
+        }
+
+        a {
+            color: #999; /* Light gray for link */
+            font-size: 12px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+        }
+
+        a:hover {
+            color: #fff; /* White on hover */
         }
     </style>
 </head>
@@ -37,10 +56,10 @@
     <div class="button-container">
         <button id="clearCourses">Clear Courses</button>
         <button id="addCourses">Add Courses</button>
-        
-        <button id="getInfo">getInfo</button>
+        <button id="getInfo">Generate Report</button>
         <p id="gpa"></p>
     </div>
+    <a href="https://github.com/ahmedhsin" target="_blank">Developed by AhmedMubarak</a>
     <script src="popup.js"></script>
 
 </body>

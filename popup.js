@@ -99,7 +99,7 @@ htmlContent = `<!DOCTYPE html>
 </head>
 <body>
     <nav id="header">
-        <h1 id="title">FCIS ASU grade report </h1>
+        <h1 id="title">FCIS ASU Grade Report </h1>
     </nav>
 
     <div id="data">
