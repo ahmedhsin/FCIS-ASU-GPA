@@ -47,10 +47,10 @@ function getAllSubjects(courses) {
     const allSubjects = document.getElementsByClassName('price-table-box2')
     console.log(allSubjects)
     Array.from(allSubjects).forEach(subject => {
-        courseName = subject.childNodes[1].innerText.split(': ')[1].trim()
-        t_points = subject.childNodes[5].innerText.match(gradeRegex)
+        courseName = subject.childNodes[1].innerText.split(': ')[1].trim().replaceAll('\t', '')
+        t_points = subject.childNodes[5].innerText.match(arGradeRegex)
         if (t_points === null) {
-            t_points = subject.childNodes[5].innerText.match(arGradeRegex)
+            t_points = subject.childNodes[5].innerText.match(gradeRegex)
         }
         grade = t_points[0]
         coursePoints = getPointFromGrade(t_points[0])
