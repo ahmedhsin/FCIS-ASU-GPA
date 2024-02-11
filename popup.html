@@ -50,12 +50,29 @@
         a:hover {
             color: #fff; /* White on hover */
         }
+        
+        #select{
+            background-color: #000;
+            color: white;
+            font-size: 5vh;
+            margin: 15px 0px;
+        }
+        #sort{
+            font-size: 5vh;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
     <div class="button-container">
         <button id="clearCourses">Clear Courses</button>
         <button id="addCourses">Add Courses</button>
+        <label for="select"id="sort">sort by</label>
+        <select id="select">
+            <option value="none">none</option>
+            <option value="hours">hours</option>
+            <option value="pointes">pointes</option>
+        </select>
         <button id="getInfo">Generate Report</button>
         <p id="gpa"></p>
     </div>

@@ -96,20 +96,24 @@ htmlContent = `<!DOCTYPE html>
     }
     </style>
     <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 </head>
 <body>
-    <nav id="header">
+    <nav id="header" class="animate__animated animate__fadeInDown">
         <h1 id="title">FCIS ASU Grade Report </h1>
     </nav>
 
-    <div id="data">
+    <div id="data"  class="animate__animated animate__fadeInLeft" >
         <h2>Name : <span id="name">Lorem ipsum dolor </span></h4>
         <h2>CGPA : <span id="cgpa">4.000</span> </h2>
         <p class="disclaimer">
         Please note that this is not an official document.</p>
     </div>
 
-    <table>
+    <table  class="animate__animated animate__fadeInUp">
         <thead>
             <tr>
                 <th>Course name</th>
@@ -146,7 +150,7 @@ document.getElementById("clearCourses").addEventListener("click", () => {
 document.getElementById("addCourses").addEventListener("click", () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { action: "add" }, function (message) {
-            console.log(message)
+            alert(message)
         });
     });
 });
@@ -179,9 +183,44 @@ document.getElementById("getInfo").addEventListener("click", () => {
                     </tr>`
             }
             ss = message
-            message.courses.forEach(((course) => {
-                add(course['name'], course['grade'], course['points'], course['hours'])
-            }))
+            if(document.getElementById("select").value == "none"){
+                message.courses.forEach(((course) => {
+                    add(course['name'], course['grade'], course['points'], course['hours'])
+                }))
+            }
+            else if(document.getElementById("select").value == "hours"){
+                // the array will sorted with bubble sort algo , bubble sort is O(N^2) time complexty 
+                // there is better algorethems but the data legnth max is 50 so no broblem 
+                for (var i = 0; i < message.courses.length; i++) {
+                    for (var j = 0; j < (message.courses.length - i - 1); j++) {
+                        if (message.courses[j].hours > message.courses[j + 1].hours) {
+                            var temp = message.courses[j]
+                            message.courses[j] = message.courses[j + 1]
+                            message.courses[j + 1] = temp
+                        }
+                    }
+                }
+
+                message.courses.forEach(((course) => {
+                    add(course['name'], course['grade'], course['points'], course['hours'])
+                }))
+            }
+            else if(document.getElementById("select").value == "pointes"){
+                for (var i = 0; i < message.courses.length; i++) {
+                    for (var j = 0; j < (message.courses.length - i - 1); j++) {
+                        if (message.courses[j].points > message.courses[j + 1].points) {
+                            var temp = message.courses[j]
+                            message.courses[j] = message.courses[j + 1]
+                            message.courses[j + 1] = temp
+                        }
+                    }
+                }
+
+                message.courses.forEach(((course) => {
+                    add(course['name'], course['grade'], course['points'], course['hours'])
+                }))
+            }
+            
             const htmlCode = new XMLSerializer().serializeToString(doc);
             const blob = new Blob([htmlCode], { type: 'text/html' });
             const dataUrl = URL.createObjectURL(blob);
