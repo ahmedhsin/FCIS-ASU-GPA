@@ -107,8 +107,9 @@ htmlContent = `<!DOCTYPE html>
     </nav>
 
     <div id="data"  class="animate__animated animate__fadeInLeft" >
-        <h2>Name : <span id="name">Lorem ipsum dolor </span></h4>
-        <h2>CGPA : <span id="cgpa">4.000</span> </h2>
+        <h2>Name : <span id="name"></span></h4>
+        <h2>CGPA : <span id="cgpa"></span> </h2>
+        <h2>Total Hours : <span id="hours"></span> </h2>
         <p class="disclaimer">
         Please note that this is not an official document.</p>
     </div>
@@ -150,7 +151,7 @@ document.getElementById("clearCourses").addEventListener("click", () => {
 document.getElementById("addCourses").addEventListener("click", () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { action: "add" }, function (message) {
-            alert(message)
+            //alert(message)
         });
     });
 });
@@ -172,6 +173,7 @@ document.getElementById("getInfo").addEventListener("click", () => {
             tablebody.innerHTML = ``;
             doc.getElementById('name').innerText = message['name']
             doc.getElementById('cgpa').innerText = message['gpa']
+            doc.getElementById('hours').innerText = message['totalHours']
             function add(name, grades, point, hours) {
 
                 tablebody.innerHTML += `

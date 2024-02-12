@@ -121,6 +121,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         t_name = document.getElementsByTagName('a')[30].innerText
         if (t_name.trim() === 'Pending Payments')
             t_name = document.getElementsByTagName('a')[2].innerText
-        sendResponse({ gpa: cgpa, courses:globalCourses,name:t_name })
+
+        totalHours = globalCourses.reduce((total, current) => {
+            if (current['grade'] === 'كرونا') return total
+            return total + current['hours']
+        }, 0)
+        sendResponse({ gpa: cgpa, courses:globalCourses,name:t_name,totalHours:totalHours })
     }
 });
