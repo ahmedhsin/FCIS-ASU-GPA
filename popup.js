@@ -96,20 +96,24 @@ htmlContent = `<!DOCTYPE html>
     }
     </style>
     <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 </head>
 <body>
-    <nav id="header">
+    <nav id="header" class="animate__animated animate__fadeInDown">
         <h1 id="title">FCIS ASU Grade Report </h1>
     </nav>
 
-    <div id="data">
+    <div id="data"  class="animate__animated animate__fadeInLeft" >
         <h2>Name : <span id="name">Lorem ipsum dolor </span></h4>
         <h2>CGPA : <span id="cgpa">4.000</span> </h2>
         <p class="disclaimer">
         Please note that this is not an official document.</p>
     </div>
 
-    <table>
+    <table  class="animate__animated animate__fadeInUp">
         <thead>
             <tr>
                 <th>Course name</th>
@@ -146,7 +150,7 @@ document.getElementById("clearCourses").addEventListener("click", () => {
 document.getElementById("addCourses").addEventListener("click", () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { action: "add" }, function (message) {
-            console.log(message)
+            alert(message)
         });
     });
 });
@@ -179,9 +183,42 @@ document.getElementById("getInfo").addEventListener("click", () => {
                     </tr>`
             }
             ss = message
+            let sign = 1 ;
+            if(document.getElementById("order").value == "descending" )
+                sign = -1 ;
+
+            if(document.getElementById("select").value == "hours"){
+                message.courses.sort((a , b)=>{return (a.hours - b.hours) * sign })
+            }
+            else if(document.getElementById("select").value == "points"){
+                message.courses.sort((a , b)=>{return (a.points - b.points) * sign })
+            }
+            
+            else if(document.getElementById("select").value == "hoursAndPoints"){
+                message.courses.sort((a , b)=>{
+                    if(a.hours == b.hours){
+                        return ((a.points - b.points) * sign)
+                    }
+                    else{
+                        return ((a.hours - b.hours) * sign)
+                    }
+                })
+            }
+            else if(document.getElementById("select").value == "pointsAndHours"){
+                message.courses.sort((a , b)=>{
+                    if(a.points == b.points){
+                        return ((a.hours - b.hours) * sign)
+                    }
+                    else{
+                        return ((a.points - b.points) * sign)
+                    }
+                })
+            }
+            
             message.courses.forEach(((course) => {
                 add(course['name'], course['grade'], course['points'], course['hours'])
             }))
+
             const htmlCode = new XMLSerializer().serializeToString(doc);
             const blob = new Blob([htmlCode], { type: 'text/html' });
             const dataUrl = URL.createObjectURL(blob);
