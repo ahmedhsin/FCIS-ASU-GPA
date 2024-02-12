@@ -109,6 +109,7 @@ htmlContent = `<!DOCTYPE html>
     <div id="data"  class="animate__animated animate__fadeInLeft" >
         <h2>Name : <span id="name"></span></h4>
         <h2>CGPA : <span id="cgpa"></span> </h2>
+        <h2>Total Courses : <span id="courses"></span> </h2>
         <h2>Total Hours : <span id="hours"></span> </h2>
         <p class="disclaimer">
         Please note that this is not an official document.</p>
@@ -134,16 +135,28 @@ htmlContent = `<!DOCTYPE html>
 </html>`
 const parser = new DOMParser();
 const doc = parser.parseFromString(htmlContent, 'text/html');
+const numcourses = document.getElementById('numcourses')
 
 window.addEventListener('load', function (evt) {
     chrome.extension.getBackgroundPage().chrome.tabs.executeScript(null, {
         file: 'payload.js'
     });;
 });
+
+function getNum (){
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, { action: "" }, function (message) {
+            numcourses.innerText = message['numcourses']
+        });
+    });
+};
+window.onload = getNum;
+
 document.getElementById("clearCourses").addEventListener("click", () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { action: "clear" }, function (message) {
             console.log(message)
+            numcourses.innerText = message['numcourses']
         });
     });
 });
@@ -152,6 +165,7 @@ document.getElementById("addCourses").addEventListener("click", () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { action: "add" }, function (message) {
             //alert(message)
+            numcourses.innerText = message['numcourses']
         });
     });
 });
@@ -174,6 +188,7 @@ document.getElementById("getInfo").addEventListener("click", () => {
             doc.getElementById('name').innerText = message['name']
             doc.getElementById('cgpa').innerText = message['gpa']
             doc.getElementById('hours').innerText = message['totalHours']
+            doc.getElementById('courses').innerText = message['numcourses']
             function add(name, grades, point, hours) {
 
                 tablebody.innerHTML += `

@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASU GPA REPORTER</title>
     <style>
+        :root {
+            --primary-color: #2980b9;
+            /* Teal */
+            --secondary-color: #f39c12;
+            /* Orange */
+            --accent-color: #d35400;
+            /* Red */
+            --text-color: #fff;
+            /* White */
+            --background-color: #222;
+            /* Dark gray */
+        }
+
         body {
             font-family: sans-serif;
             margin: 0;
-            background-color: #222; /* Dark gray background */
-            color: #fff; /* White text */
+            background-color: var(--background-color);
+            color: var(--text-color);
             padding: 15px;
         }
 
@@ -22,24 +36,33 @@
             width: 150px;
             height: 40px;
             margin: 10px;
-            background-color: #333; /* Darker gray background */
-            color: #fff; /* White text */
+            background-color: var(--primary-color);
+            /* Use modern primary color */
+            color: var(--text-color);
             border: none;
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            /* Subtle shadow */
+            transition: all 0.2s ease-in-out;
+            /* Smooth transition on hover */
         }
 
         button:hover {
-            background-color: #444; /* Even darker gray on hover */
+            background-color: var(--secondary-color);
+            /* Change color on hover */
+            transform: translateY(-2px);
+            /* Add slight hover animation */
         }
 
         #gpa {
-            color: #0f0; /* Green for GPA */
+            color: var(--accent-color);
+            /* Use accent color for GPA */
         }
 
         a {
-            color: #999; /* Light gray for link */
+            color: var(--text-color);
             font-size: 12px;
             text-decoration: none;
             margin-top: 20px;
@@ -48,26 +71,60 @@
         }
 
         a:hover {
-            color: #fff; /* White on hover */
+            color: var(--primary-color);
+            /* Use primary color on hover */
         }
-        
-        #select , #order{
-            background-color: #000;
-            color: white;
-            font-size: 5vh;
+
+        #select,
+        #order {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            /* Adjust font size */
+            /* Consider using CSS variables for spacing */
+            padding: 5px 10px;
+            border: 1px solid var(--text-color);
+            /* Thin border */
+            border-radius: 5px;
             margin: 15px 0px;
         }
-        #sort{
-            font-size: 5vh;
-            font-weight: 600;
+
+        #sort {
+            font-size: 1rem;
+            /* Adjust font size */
+            font-weight: 400;
+            display: inline-block;
+            /* Avoid unnecessary divs */
+            margin-right: 10px;
+        }
+
+        #numcourses {
+            border-radius: 50%;
+            width: 15%;
+            /* Round element */
+            background-color: var(--secondary-color);
+            /* Use secondary color */
+            color: var(--text-color);
+            padding: 10px;
+            /* Add padding */
+            margin-top: 5px;
+            font-size: 1.5rem;
+            display: inline-block;
+            /* Adjust font size */
+        }
+
+        #numcourses:hover {
+            transform: scale(1.1);
+            /* Add subtle hover animation */
         }
     </style>
 </head>
+
 <body>
     <div class="button-container">
         <button id="clearCourses">Clear Courses</button>
         <button id="addCourses">Add Courses</button>
-        <label for="select"id="sort">sort by</label>
+        <label for="select" id="sort">sort by</label>
         <select id="select">
             <option value="none">none</option>
             <option value="hours">hours</option>
@@ -81,10 +138,12 @@
         </select>
 
         <button id="getInfo">Generate Report</button>
+        <p id="numcourses">0</p>
         <p id="gpa"></p>
     </div>
     <a href="https://github.com/ahmedhsin" target="_blank">Developed by AhmedMubarak</a>
     <script src="popup.js"></script>
 
 </body>
+
 </html>

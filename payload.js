@@ -109,10 +109,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "clear") {
         clearCourses()
         globalCourses = []
-        sendResponse({ message: "CLEAR OK." });
+        sendResponse({ message: "CLEAR OK.", numcourses:globalCourses.length });
     } else if (message.action === "add") {
         addCourses(globalCourses)
-        sendResponse({ message: "Add OK." });
+        sendResponse({ message: "Add OK.",numcourses:globalCourses.length });
     } else if (message.action === "calc") {
         cgpa = calculateGpa(globalCourses)
         sendResponse({ gpa: cgpa })
@@ -126,6 +126,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             if (current['grade'] === 'كرونا') return total
             return total + current['hours']
         }, 0)
-        sendResponse({ gpa: cgpa, courses:globalCourses,name:t_name,totalHours:totalHours })
+        sendResponse({ gpa: cgpa, courses:globalCourses,name:t_name,totalHours:totalHours,numcourses: globalCourses.length})
+    }else{
+        sendResponse({numcourses: globalCourses.length})
     }
 });
