@@ -38,5 +38,6 @@ This extension is provided for educational purposes and may not work with future
 
 Feel free to contribute by opening issues or submitting pull requests.
 
-Thanks to [@abdullahs](https://github.com/abdullhss) for the report template.
-Thanks to [@Abdo-Hamdi](https://github.com/Abdo-Hamdi) for submitting issues
+Thanks to [@abdullahs](https://github.com/abdullhss) for the report template & add sorting function.
+
+Thanks to [@Abdo-Hamdi](https://github.com/Abdo-Hamdi) for submitting issues.
