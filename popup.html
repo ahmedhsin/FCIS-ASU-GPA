@@ -51,7 +51,7 @@
             color: #fff; /* White on hover */
         }
         
-        #select{
+        #select , #order{
             background-color: #000;
             color: white;
             font-size: 5vh;
@@ -71,8 +71,15 @@
         <select id="select">
             <option value="none">none</option>
             <option value="hours">hours</option>
-            <option value="pointes">pointes</option>
+            <option value="points">points</option>
+            <option value="hoursAndPoints"> hours And points</option>
+            <option value="pointsAndHours">points And hours</option>
         </select>
+        <select id="order">
+            <option value="ascending">ascending</option>
+            <option value="descending">descending</option>
+        </select>
+
         <button id="getInfo">Generate Report</button>
         <p id="gpa"></p>
     </div>

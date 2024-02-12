@@ -183,44 +183,42 @@ document.getElementById("getInfo").addEventListener("click", () => {
                     </tr>`
             }
             ss = message
-            if(document.getElementById("select").value == "none"){
-                message.courses.forEach(((course) => {
-                    add(course['name'], course['grade'], course['points'], course['hours'])
-                }))
-            }
-            else if(document.getElementById("select").value == "hours"){
-                // the array will sorted with bubble sort algo , bubble sort is O(N^2) time complexty 
-                // there is better algorethems but the data legnth max is 50 so no broblem 
-                for (var i = 0; i < message.courses.length; i++) {
-                    for (var j = 0; j < (message.courses.length - i - 1); j++) {
-                        if (message.courses[j].hours > message.courses[j + 1].hours) {
-                            var temp = message.courses[j]
-                            message.courses[j] = message.courses[j + 1]
-                            message.courses[j + 1] = temp
-                        }
-                    }
-                }
+            let sign = 1 ;
+            if(document.getElementById("order").value == "descending" )
+                sign = -1 ;
 
-                message.courses.forEach(((course) => {
-                    add(course['name'], course['grade'], course['points'], course['hours'])
-                }))
+            if(document.getElementById("select").value == "hours"){
+                message.courses.sort((a , b)=>{return (a.hours - b.hours) * sign })
             }
-            else if(document.getElementById("select").value == "pointes"){
-                for (var i = 0; i < message.courses.length; i++) {
-                    for (var j = 0; j < (message.courses.length - i - 1); j++) {
-                        if (message.courses[j].points > message.courses[j + 1].points) {
-                            var temp = message.courses[j]
-                            message.courses[j] = message.courses[j + 1]
-                            message.courses[j + 1] = temp
-                        }
-                    }
-                }
-
-                message.courses.forEach(((course) => {
-                    add(course['name'], course['grade'], course['points'], course['hours'])
-                }))
+            else if(document.getElementById("select").value == "points"){
+                message.courses.sort((a , b)=>{return (a.points - b.points) * sign })
             }
             
+            else if(document.getElementById("select").value == "hoursAndPoints"){
+                message.courses.sort((a , b)=>{
+                    if(a.hours == b.hours){
+                        return ((a.points - b.points) * sign)
+                    }
+                    else{
+                        return ((a.hours - b.hours) * sign)
+                    }
+                })
+            }
+            else if(document.getElementById("select").value == "pointsAndHours"){
+                message.courses.sort((a , b)=>{
+                    if(a.points == b.points){
+                        return ((a.hours - b.hours) * sign)
+                    }
+                    else{
+                        return ((a.points - b.points) * sign)
+                    }
+                })
+            }
+            
+            message.courses.forEach(((course) => {
+                add(course['name'], course['grade'], course['points'], course['hours'])
+            }))
+
             const htmlCode = new XMLSerializer().serializeToString(doc);
             const blob = new Blob([htmlCode], { type: 'text/html' });
             const dataUrl = URL.createObjectURL(blob);
