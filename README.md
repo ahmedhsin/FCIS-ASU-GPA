@@ -41,3 +41,10 @@ Feel free to contribute by opening issues or submitting pull requests.
 Thanks to [@abdullahs](https://github.com/abdullhss) for the report template & add sorting function.
 
 Thanks to [@Abdo-Hamdi](https://github.com/Abdo-Hamdi) for submitting issues.
+
+Thanks to [@me](https://github.com/ahmedhsin) for implement the new template.
+
+Thanks to yusuf salah for the design for the new template.
+
+
+
