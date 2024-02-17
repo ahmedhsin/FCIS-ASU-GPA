@@ -1,0 +1,130 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Cairo, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+        'Liberation Sans', sans-serif;
+    margin-bottom: 50px;
+}
+
+.flex {
+    display: flex;
+}
+
+nav {
+    background-color: #000463;
+    color: white;
+    height: 72px;
+    align-items: center;
+    gap: 12px;
+    padding-left: 10%;
+    margin-bottom: 75px;
+}
+.f-16{
+    font-size: 16px;
+}
+.header {
+    background-color: #d1d3ffbf;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 85%;
+    justify-content: space-between;
+    position: relative;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.name {
+    background-color: #d1d3ffbf;
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 13px;
+    text-align: center;
+    border-top-left-radius: 35px;
+    width: 20%;
+    top: 50%;
+    top: -25px;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+
+.ball {
+    background-color: #1A1D73;
+    margin: 10px;
+    color: white;
+    border-radius: 75%;
+    width: 125px;
+    height: 125px;
+    text-align: center;
+    line-height: 0;
+    position: relative;
+}
+
+.t-top {
+    padding: 0;
+    font-size: 12px;
+    font-weight: 200;
+    position: relative;
+    top: 15px;
+}
+
+.content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.num-45 {
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.f-color {
+    background-color: #0004630f;
+}
+
+.s-color {
+    background-color: #e1e1e1;
+}
+
+.table {
+    width: 88%;
+}
+
+.table-s {
+    border-collapse: collapse;
+    width: 100%;
+}
+.f-14{
+    font-size: 14px;
+}
+.table-s th,
+.table-s td {
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 25px;
+    text-align: left;
+}
+
+thead {
+    background-color: #1A1D73;
+    color: white;
+    font-weight: bold;
+}
+
+.b-tr {
+    border-top-right-radius: 15px;
+}
+
+.b-tl {
+    border-top-left-radius: 15px;
+}

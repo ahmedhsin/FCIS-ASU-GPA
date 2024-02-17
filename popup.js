@@ -1,137 +1,74 @@
 // Inject the payload.js script into the current tab after the popout has loaded
-htmlContent = `<!DOCTYPE html>
+htmlContent = `
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-    *{
-        margin: 0%;
-        padding: 0%;
-    }
-    #title{
-        background-color: black;
-        color: white;
-        padding: 2vh;
-        border-radius: 1vh;
-    }
-    #header{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 3vh;
-        line-height: 6vh;
-        margin: 2vh 0vh;
-    }
-    #data{
-        margin: 5vh 10vh;
-    }
-    
-    table {
-        width: 90%;
-        margin-bottom: 20px;
-        font-weight: 600;
-        margin: 0 auto;
-    }
-     td {
-        padding: 8px;
-        text-align: left;
-        border-right: 2px solid #000; 
-                border-bottom: 2px solid #000;
-    }
-    th {
-        padding: 8px;
-        text-align: center;
-        color: white;
-        font-weight: 800;
-        font-size: 2.5vh;
-        letter-spacing: 1.1px;
-        background-color: #000000;
-        border-right: 2px solid #000;
-        border-bottom: 2px solid #000;
-    }*{
-        margin: 0%;
-        padding: 0%;
-    }
-    #title{
-        background-color: black;
-        color: white;
-        padding: 2vh;
-        border-radius: 1vh;
-    }
-    #header{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 3vh;
-        line-height: 6vh;
-        margin: 2vh 0vh;
-    }
-    #data{
-        margin: 5vh 10vh;
-    }
-    
-    table {
-        width: 90%;
-        margin-bottom: 20px;
-        font-weight: 600;
-        margin: 0 auto;
-    }
-     td {
-        padding: 8px;
-        text-align: left;
-        border-right: 2px solid #000; 
-                border-bottom: 2px solid #000;
-    }
-    th {
-        padding: 8px;
-        text-align: center;
-        color: white;
-        font-weight: 800;
-        font-size: 2.5vh;
-        letter-spacing: 1.1px;
-        background-color: #000000;
-        border-right: 2px solid #000;
-        border-bottom: 2px solid #000;
-    }
-    </style>
-    <title>Document</title>
+    <title>FCIS REPORT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+  <link
+    rel="stylesheet"
+    href="${chrome.runtime.getURL('style.css')}"
+  />
 </head>
+
 <body>
-    <nav id="header" class="animate__animated animate__fadeInDown">
-        <h1 id="title">FCIS ASU Grade Report </h1>
+    <nav class="flex animate__animated animate__fadeInLeft">
+        <img src="${chrome.runtime.getURL('college.png')}" width="52px" height="52px">
+        <p class="bold f-16">كلية الحاسبات والمعلومات - جامعة عين شمس</p>
     </nav>
-
-    <div id="data"  class="animate__animated animate__fadeInLeft" >
-        <h2>Name : <span id="name"></span></h4>
-        <h2>CGPA : <span id="cgpa"></span> </h2>
-        <h2>Total Courses : <span id="courses"></span> </h2>
-        <h2>Total Hours : <span id="hours"></span> </h2>
-        <p class="disclaimer">
-        Please note that this is not an official document.</p>
+    <div class="content flex animate__animated animate__fadeInLeft">
+        <section class="header flex animate__animated animate__fadeInLeft">
+            <div class="name bold" id="name"></div>
+            <div class="right">
+                <p class="bold f-14">Grade Report Tool</p>
+                <p class="bold f-14">Note: This page doesn’t represent any official document</p>
+            </div>
+            <div class="left flex">
+                <div class="ball animate__animated animate__fadeInLeft">
+                    <p class="t-top">Total Courses</p>
+                    <p class="num-45" id="courses">0</p>
+                </div>
+                <div class="ball animate__animated animate__fadeInLeft">
+                    <p class="t-top">Total Hours</p>
+                    <p class="num-45" id="hours">0</p>
+                </div>
+                <div class="ball animate__animated animate__fadeInLeft">
+                    <p class="t-top">CGPA</p>
+                    <p class="num-45" id="cgpa">0</p>
+                </div>
+            </div>
+        </section>
+        <section class="table animate__animated animate__fadeInLeft">
+            <table class="table-s">
+                <thead>
+                    <tr>
+                        <th class="b-tl">Course</th>
+                        <th>Grade</th>
+                        <th>Points</th>
+                        <th class="b-tr">Hours</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr class="f-color">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
     </div>
-
-    <table  class="animate__animated animate__fadeInUp">
-        <thead>
-            <tr>
-                <th>Course name</th>
-                <th>Grade</th>
-                <th>Points</th>
-                <th>Hours</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-        </tbody>
-    </table>
-
-
-
-    <script src="script.js"></script>
 </body>
+
 </html>`
 const parser = new DOMParser();
 const doc = parser.parseFromString(htmlContent, 'text/html');
@@ -184,15 +121,15 @@ document.getElementById("getInfo").addEventListener("click", () => {
             console.log(message)
             let tablebody = doc.getElementById("tableBody")
 
-            tablebody.innerHTML = ``;
+            /*tablebody.innerHTML = ``;*/
             doc.getElementById('name').innerText = message['name']
             doc.getElementById('cgpa').innerText = message['gpa']
             doc.getElementById('hours').innerText = message['totalHours']
             doc.getElementById('courses').innerText = message['numcourses']
-            function add(name, grades, point, hours) {
+            function add(name, grades, point, hours, rowColor) {
 
                 tablebody.innerHTML += `
-                    <tr>
+                    <tr class="${rowColor}">
                     <td>${name}</td>
                     <td>${grades}</td>
                     <td>${point}</td>
@@ -231,9 +168,11 @@ document.getElementById("getInfo").addEventListener("click", () => {
                     }
                 })
             }
-            
+            let rowColor = 's-color'
             message.courses.forEach(((course) => {
-                add(course['name'], course['grade'], course['points'], course['hours'])
+                add(course['name'], course['grade'], course['points'], course['hours'], rowColor)
+                if (rowColor == 's-color') rowColor = 'f-color'
+                else rowColor = 's-color'
             }))
 
             const htmlCode = new XMLSerializer().serializeToString(doc);

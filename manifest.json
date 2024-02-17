@@ -3,7 +3,7 @@
 
 	"name": "FCIS-ASU-GPA",
 	"description": "CALCULATE GPA AND GET REPORT",
-	"version": "1.0",
+	"version": "2.0",
 	"author": "@ahmedhsin",
 
 	"background": {
@@ -11,6 +11,10 @@
 		"persistent": true
 	},
 
+	"icons": {
+		"48": "college.png",
+		"128": "college.png"
+	},
 	"permissions": [
         "tabs",
         "http://*/",
